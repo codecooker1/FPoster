@@ -1,7 +1,10 @@
 import os
 import json
+import dotenv
 import requests
 from dotenv import load_dotenv
+
+load_dotenv()
 
 history = []
 headers = {"Authorization": f"Bearer {os.environ.get('EDEN_API')}"}
@@ -35,8 +38,8 @@ def get_responce(prompt, payload=payload):
     response = requests.post(url, json=payload, headers=headers)
     result = json.loads(response.text)
     print(result)
-    #output = result['openai']['generated_text']
+    output = result['openai/gpt-3.5-turbo']['generated_text']
  
-    #history.append(output)
-    #return output
+    history.append(output)
+    return output
 
